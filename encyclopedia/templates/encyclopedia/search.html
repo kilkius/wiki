@@ -5,5 +5,13 @@
 {% endblock %}
 
 {% block body %}
-   <h1>Search term: {{ query }}</h1>
+    <h3>Searched: {{ query }}</h3>
+    <ul>
+    {% for each in matches %}
+
+        <li><a href="{% url 'wiki:pages' entry=each %}">{{ each }}</a></li>
+
+    {% endfor %}
+    </ul>
+
 {% endblock %} 
