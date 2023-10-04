@@ -6,7 +6,6 @@
 
 {% block body %}
     <h2>Add a new entry</h2>
-    <form action="{% url 'wiki:add' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit">

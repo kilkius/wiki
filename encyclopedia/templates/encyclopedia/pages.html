@@ -5,5 +5,8 @@
 {% endblock %}
 
 {% block body %}
+    <form action="{% url 'wiki:add' %}" method="post">
+        <textarea value=""
+    </form>
    {{ data|safe }}
 {% endblock %} 

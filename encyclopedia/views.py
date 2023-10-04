@@ -1,5 +1,5 @@
 from django import forms
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from markdown2 import Markdown
@@ -10,10 +10,10 @@ markdowner = Markdown()
 
 # form to add new entry
 class AddForm(forms.Form):
-    title = forms.CharField(label="Title")
     content = forms.CharField(widget=forms.Textarea)
+    title = forms.CharField(label="Save as: ")
 
-
+# homepage to display links to all entries
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -71,7 +71,7 @@ def add(request):
 
             # show error if entry already exists
             if title in util.list_entries():
-                return HttpResponse("This entry already exists")
+                return render(request, "encyclopedia/exists.html")
             
             # save entry and redirect to the new page
             util.save_entry(title, content)
@@ -82,3 +82,7 @@ def add(request):
         "form" : AddForm()
     })
 
+def edit(request):
+    # if method is post, save, else get pages name and render edit page with content already in the form
+    if request.method == "POST":
+        re
